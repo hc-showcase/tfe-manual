@@ -1,7 +1,10 @@
+variable "project" {
+  default = "mkaesz" 
+}
+
 provider "google" {
-  credentials = file("/Users/mkaesz/.config/gcloud/application_default_credentials.json")
-  project     = "mkaesz"
-  region      = "europe-west3"
+  credentials = file("~/.config/gcloud/application_default_credentials.json")
+  project     = var.project
 }
 
 resource "google_compute_firewall" "default" {
