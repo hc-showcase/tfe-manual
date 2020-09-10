@@ -1,6 +1,14 @@
 #!/bin/sh
 
-sudo sed 's/enforcing/disabled/g' /etc/selinux/config
+sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config
+
+sudo yum -y install docker
+
+sudo groupadd docker
+sudo usermod -a -G docker mkaesz
+
+sudo systemctl start docker
+sudo systemctl enable docker
 
 sudo systemctl stop firewalld
 sudo systemctl disable firewalld
