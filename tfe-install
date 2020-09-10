@@ -13,7 +13,8 @@ sudo systemctl enable docker
 sudo systemctl stop firewalld
 sudo systemctl disable firewalld
 
-curl https://install.terraform.io/ptfe/stable | sudo bash
+curl https://install.terraform.io/ptfe/stable -o install
+sudo bash install no-docker no-proxy
 
 echo "source /etc/replicated.alias" >> .bashrc
 
