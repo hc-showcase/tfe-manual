@@ -2,7 +2,7 @@
 
 sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config
 
-sudo yum -y install docker
+sudo yum -y install docker jq
 
 sudo groupadd docker
 sudo usermod -a -G docker mkaesz

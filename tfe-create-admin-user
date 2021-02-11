@@ -1,0 +1,25 @@
+#!/bin/sh
+
+while ! curl -ksfS --connect-timeout 5 https://tfe.msk.pub/_health_check; do
+    sleep 5
+done
+
+initial_token=$(replicated admin retrieve-iact | tr -d '\r')
+
+cat << EOF > payload.json
+{
+  "username": "admin",
+  "email": "it@mycompany.com",
+  "password": "asdasdasdasd"
+}
+EOF
+
+response=$(curl \
+  --header "Content-Type: application/json" \
+  --request POST \
+  --data @payload.json \
+  https://tfe.msk.pub/admin/initial-admin-user?token=$initial_token)
+
+admin_token=$(echo $response | cut -d ' ' -f 5)
+
+echo $admin_token > admin_token
